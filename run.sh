@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $1 ]; then
-    echo "Please supply the number of the challenge you want to run. (e.g. './run.sh 4')"
+    echo "Please supply the number of the problem you want to run. (e.g. './run.sh 4')"
     exit 1
 fi
 
