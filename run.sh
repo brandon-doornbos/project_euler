@@ -11,4 +11,6 @@ fi
 
 g++ -Wall --pedantic-errors -std=c++20 -O2 -o build/$1 -O2 src/$1.cpp
 
-./build/$1
+if [ $? == 0 ]; then
+    ./build/$1
+fi
