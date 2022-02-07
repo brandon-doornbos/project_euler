@@ -1,12 +1,13 @@
+#include <cstdint>
 #include <iostream>
 
-int32_t run(int32_t n)
+int32_t const run(int32_t n)
 {
-    for (int32_t i = n;; ++i) {
-        for (int32_t j = n; j != 0; --j) {
+    for (int32_t i = n;; i += n) {
+        for (int32_t j = n - 1; j != 0; j -= 1) {
             if (i % j != 0) {
                 break;
-            } else if (j == 1) {
+            } else if (j == 3) {
                 return i;
             }
         }
