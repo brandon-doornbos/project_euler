@@ -27,7 +27,7 @@ std::vector<int32_t> const get_primes(int32_t const max)
 
 int32_t const run(int32_t n)
 {
-    int32_t prime_max = 100000;
+    int32_t prime_max = 100;
     auto primes = get_primes(prime_max);
 
     for (auto i = 2;; i += 1) {
@@ -40,7 +40,7 @@ int32_t const run(int32_t n)
         auto num = tri;
         bool done = false;
         while (!done) {
-            // bool next = false;
+            bool next = false;
             for (auto prime : primes) {
                 if (num == prime) {
                     factors[prime] += 1;
@@ -49,16 +49,15 @@ int32_t const run(int32_t n)
                 } else if (num % prime == 0) {
                     factors[prime] += 1;
                     num /= prime;
-                    // next = true;
+                    next = true;
                     break;
                 }
             }
-            // FIXME: Figure out why this gets increased way to often and how to only do it when necessary
             // if there were not enough primes, get more and retry
-            // if (!next) {
-            //     prime_max *= 2;
-            //     primes = get_primes(prime_max);
-            // }
+            if (!next && !done) {
+                 prime_max *= 2;
+                 primes = get_primes(prime_max);
+            }
         }
 
         // get the divisor count (https://www.themathdoctors.org/counting-divisors-of-a-number/)
