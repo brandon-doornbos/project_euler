@@ -9,7 +9,7 @@ if [ ! -d "build" ]; then
     mkdir build
 fi
 
-g++ -Wall --pedantic-errors -std=c++20 -O2 -o build/$1 -O2 src/$1.cpp
+g++ -Wall --pedantic-errors -std=c++20 -O2 -o build/$1 src/$1.cpp
 
 if [ $? == 0 ]; then
     ./build/$1
