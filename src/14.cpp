@@ -1,31 +1,24 @@
 #include <cstdint>
 #include <iostream>
-#include <unordered_map>
-
-struct Number {
-    int32_t value;
-    int32_t term_amt;
-};
+#include <vector>
 
 int32_t const run(int32_t max)
 {
-    std::unordered_map<int32_t, int32_t> terms {};
+    std::vector<int32_t> terms(max);
     terms[1] = 1;
-    Number best {};
+    int32_t best_number = -1;
+    int32_t best_term_amt = 0;
 
-    for (auto i = 1; i < max; i += 1) {
+    for (auto i = 2; i < max; i += 1) {
         uint64_t number = i;
-        int32_t term_amt = 0;
 
-        while (true) {
-            if (terms.contains(number)) {
+        for (int32_t term_amt = 0;; term_amt += 1) {
+            if (number < (uint64_t)max && terms[number]) {
                 term_amt += terms[number];
                 terms[i] = term_amt;
-                if (term_amt > best.term_amt) {
-                    best = {
-                        i,
-                        term_amt
-                    };
+                if (term_amt > best_term_amt) {
+                    best_number = i;
+                    best_term_amt = term_amt;
                 }
                 break;
             } else {
@@ -34,13 +27,11 @@ int32_t const run(int32_t max)
                 } else {
                     number = number * 3 + 1;
                 }
-
-                term_amt += 1;
             }
         }
     }
 
-    return best.value;
+    return best_number;
 }
 
 int main()
